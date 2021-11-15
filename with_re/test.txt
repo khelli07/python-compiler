@@ -1,0 +1,5 @@
+n = 5
+paaaa =    1
+while n > 0:
+  _P_ = _P_ * n
+  n = n - 1

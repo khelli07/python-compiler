@@ -1,0 +1,5 @@
+Expr    -> Term ((PLUS|MINUS) Term)*
+Term    -> Factor ((MUL|DIV) Factor)*
+Factor  -> INT|FLOAT
+        -> (PLUS|MINUS) Factor
+        -> LPAREN Expr RPAREN
