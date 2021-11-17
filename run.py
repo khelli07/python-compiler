@@ -1,6 +1,5 @@
 import sys
-from typing import Text
-from lexer import *
+from pycomp.lexer import *
 
 if __name__ == '__main__':
     filename = sys.argv[1]
