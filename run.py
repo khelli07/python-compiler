@@ -1,5 +1,5 @@
 import sys
-from pycomp.lexer import *
+from pycomp.lexer import run_lexer
 
 if __name__ == '__main__':
     filename = sys.argv[1]

@@ -1,10 +1,13 @@
+# =================== >>
+# TOKEN PATTERNS
+# =================== >>
 token_expr = [
     # WHITESPACE AND COMMENTS ==================== >>
     (r'[\s\t]',                  None),
     (r'\\n',                     None),
-    (r'#[^\n]*',                'SHORT_COMMENT'),
-    (r'\'{3}',                  'LONG_COMMENT'),
-    (r'\"{3}',                  'LONG_COMMENT'),
+    (r'#[^\n]*',                'LN_COMMENT'),
+    (r'\'{3}',                  'SQ_COMMENT'),
+    (r'\"{3}',                  'DQ_COMMENT'),
     # RESERVED KEYWORDS ========================== >>
     (r'False',                  'FALSE'),
     (r'None',                   'NONE'),
@@ -51,4 +54,7 @@ token_expr = [
     (r'\'',                     'SQUOTE'),
     (r'\"',                     'DQUOTE'),
     (r'\?',                     'QMARK'),
+
+    # CATCH EVERYTHING ELSE HERE
+    (r'.*',                     'UNCATEGORIZED'),
 ]

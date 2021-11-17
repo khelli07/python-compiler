@@ -10,8 +10,7 @@ def payment():
 	
 	shopping_cart_id = data[shopping_cart_id]
 
-	
-	# virtual_account 7771674623
+	# virtual_account 7771674623 @@
 	virtual_account = 1234
 	for i in range(VIRTUAL_ACCOUNT_LENGTH):
 		rand = randint(1, 9)
