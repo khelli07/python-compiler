@@ -1,7 +1,7 @@
 # =================== >>
 # ERROR
 # =================== >>
-from pycomp.utils import SPACE
+from database.token_db import SPACE
 
 class Error:
     def __init__(self, name, pos_start, pos_end, message, txtline):

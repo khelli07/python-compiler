@@ -2,7 +2,7 @@
 # LEXER
 # =================== >>
 import sys, re
-from database.token_db import token_expr
+from database.token_db import token_rule
 from pycomp.error import Error
 from pycomp.utils import count_length
 
@@ -37,7 +37,7 @@ class Lexer:
         self.text = text
         self.pos = Position(0, 1, 0, filename, text)
 
-    def tokenize(self, rules=token_expr):
+    def tokenize(self, rules=token_rule):
         tokens = []
 
         text_by_lines = self.text.split("\n")
