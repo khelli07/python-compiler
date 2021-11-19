@@ -1,0 +1,32 @@
+ASSIGN
+
+var pake fa
+assign -> var = arith_expr | var = arith_expr
+
+EKSPRESI
+
+arith_num -> [ya arith num apa lg]
+arith_expr	-> arith_num | arith_num arith_opr arith_expr | arith_expr arith_opr arith_expr
+aug_arith_expr -> 
+
+bool -> True | False
+logic_expr -> bool | bool logic_opr logic_expr | logic_expr logic_opr logic_expr
+
+char -> aduh
+
+CONDITIONAL
+
+conditional -> if logic_expr ':'
+
+LOOP
+
+SUBPROGRAM
+
+subprogram	-> def [name](var, var): ....
+gausah deteksi block? karena gausah detect indent & sm sj
+
+OOP
+
+
+
+nah
