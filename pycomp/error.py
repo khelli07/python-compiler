@@ -2,6 +2,7 @@
 # ERROR
 # =================== >>
 from database.token_db import SPACE
+from pycomp.utils import get_token, count_length
 
 class Error:
     def __init__(self, name, pos_start, pos_end, message, txtline):
@@ -15,7 +16,7 @@ class Error:
         print(self.txtline)
         print(SPACE * (self.pos_start.col) + '^')
         print(f"{self.name} Error: {self.message}")
-        print(f"In file {self.pos_start.filename}, line {self.pos_start.line + 1}.")
+        print(f"In file {self.pos_start.filename}, line {self.pos_start.line}.")
         # print(SPACE * (self.pos_start.col) + '^' * (self.pos_end.col - self.pos_start.col))
 
 class IllegalCharError(Error):
@@ -24,4 +25,15 @@ class IllegalCharError(Error):
 
 class InvalidSyntaxError(Error):
     def __init__(self, pos_start, pos_end, message, txtline):
-        super().__init__("Invalid Syntax", pos_start, pos_end, message, txtline)
+        super().__init__("Syntax", pos_start, pos_end, message, txtline)
+
+def getError(name, line, message, text_by_line):
+    token = get_token(name, line)
+    pos_start = token.pos_start.copy()
+    pos_end = token.pos_end.copy()
+    pos_end.col += count_length(name)
+
+    error = InvalidSyntaxError(pos_start, pos_end, message,
+                            text_by_line[token.pos_start.line - 1])
+    
+    return error

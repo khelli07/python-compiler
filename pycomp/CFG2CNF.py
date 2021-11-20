@@ -17,8 +17,17 @@ def retrieve_grammar(filename):
     with open(filename) as cfg:
         lines = cfg.readlines()
     
-    grammar_list = [ln.replace("->", "").split() for ln in lines]
-    grammar_list = [grammar for grammar in grammar_list if len(grammar) != 0]
+    readline = [ln.replace("\n", "").split(" -> ") for ln in lines]
+    grammar_list = []
+    for line in readline:
+        if (len(line) >= 2):
+            grammar_name = line[0]
+            grammar_bodies = line[1].split(" | ")
+            for grammar in grammar_bodies:
+                new_grammar = [grammar_name]
+                new_grammar.extend(grammar.strip().split())
+                grammar_list.append(new_grammar)
+
     return grammar_list
 
 def subs_unit_prod(rule, grammar_list):
@@ -49,12 +58,15 @@ def handle_unit_production(grammar_list):
     have been substituted.
     '''
     rules = copy.deepcopy(grammar_list)
-    rlength = len(grammar_list)
-    for i in range(rlength):
+    rlength = len(rules)
+    i = 0
+    while i < rlength:
         if (len(rules[i]) == 2) and not(isTerminal(rules[i][1])):
-            new_rule = subs_unit_prod(rules[i], grammar_list)
+            new_rule = subs_unit_prod(rules[i], rules)
             rules.pop(i)
             rules.extend(new_rule)
+        else:
+            i += 1
 
     return rules
                     
@@ -73,30 +85,47 @@ def CFG2CNF(grammar_list):
     # Handle more than two variables and/or terminals
     # e.g. Convert S -> X Y Z to S -> X A; A -> Y Z
     ctr = 0
+    extended_rule = []
     for i in range(rlength):
         if (len(cnf_rules[i]) > 3): # NOT CHOMSKY
             new_product = cnf_rules[i][2:]
             cnf_rules[i] = cnf_rules[i][:2]
 
             # Add new variable (extended)
-            new_rule = new_product[0] + "_EXT" + str(ctr)
+            found = False
+            new_rule = ""
+            for rule in extended_rule:
+                if new_product == rule[1:]:
+                    found = True
+                    new_rule = rule[0]
+                    break
+            
+            if not(found):
+                new_rule = new_product[0] + "_EXT" + str(ctr)
+                ctr += 1
+                new_product.insert(0, new_rule)
+                extended_rule.append(new_product)
+            else:
+                new_product.insert(0, new_rule)
+            
+            # Add rule to the end
             cnf_rules[i].append(new_rule)
-            new_product.insert(0, new_rule)
-            ctr += 1
 
             # Insert to one place after this rule
             # so after this rule is processed, we immediately process the next one.
             # The concept is similar to recursivity
             cnf_rules.insert(i + 1, new_product)
 
-    # Handle unit production (by theory it should be pre-process)
-    # But, because for loop can not do tracking, I'll do post-process
-    cnf_rules = handle_unit_production(cnf_rules)
 
     # Take unique productions only and sort them
     cnf_rules = set(tuple(l) for l in cnf_rules)
     cnf_rules = sorted(cnf_rules, key=lambda x: x[0])
     cnf_rules = [list(rule) for rule in cnf_rules]
+
+    # Handle unit production (by theory it should be pre-process)
+    # But, because for loop can not do tracking, I'll do post-process
+    cnf_rules = handle_unit_production(cnf_rules)
+
     return cnf_rules
 
 def run_converter(filein, fileout):
@@ -112,5 +141,3 @@ def run_converter(filein, fileout):
         f.write("\n")
 
     f.close()
-
-run_converter("database/CFG.txt", "database/CNF.txt")

@@ -19,7 +19,7 @@ def extract_text_from_image():
 			cii = d(c)
 			if cii == PIPE_ASCII:
 				f_outwrite(I)
-			elif ACCEPTED_ASCII_LIST:
+            elif ACCEPTED_ASCII_LIST:
 				f_outwrite(c)
 			else:
 				f_outwrite( )

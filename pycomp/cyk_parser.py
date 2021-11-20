@@ -3,9 +3,9 @@
 # =================== >>
 import itertools, sys
 from pycomp.lexer import run_lexer
-from pycomp.error import InvalidSyntaxError
+from pycomp.error import InvalidSyntaxError, getError
 from pycomp.cfg2cnf import retrieve_grammar
-from pycomp.utils import count_length
+from pycomp.utils import count_length, get_tag_string, get_token
 
 def subs_grammar(union, production, grammar_list):
     '''
@@ -21,15 +21,6 @@ def subs_grammar(union, production, grammar_list):
     for grammar in grammar_list:
         if (grammar[0] not in union) and (production == tuple(grammar[1:])):
             union.append(grammar[0])
-
-def get_token(tag_name, token_line):
-    for token in token_line:
-        if token.tag == tag_name:
-            return token
-
-def get_tag_string(tag_name, token_line):
-    token = get_token(tag_name, token_line)
-    return token.tag
 
 class Parser:
     def __init__(self, filename, cnf_file, text):
@@ -61,46 +52,41 @@ class Parser:
                     for production in lprod:
                         subs_grammar(union, production, cnf_grammar)
                     cyk_table[i][j] = [var for var in set(union)]
-        
+
         return (cyk_table[length - 1][0] != [])
 
     def parse_text(self):
         text_by_line, tokenized_lines = run_lexer(self.filename, self.text)
         cnf_grammar = retrieve_grammar(self.cnf_file)
 
-        is_if_block = False
+        if_count = 0
+        ctr = 0
         for line in tokenized_lines:
-            line_stringified = [get_tag_string(token.tag, line) for token in line]
+            print(f"Checking line {ctr + 1}...")
+
             is_accepted = self.parse_cyk(line, cnf_grammar)
+            line_stringified = [get_tag_string(token.tag, line) for token in line]
+            # Handle if block
             if is_accepted:
-                if 'IF' in line:
-                    is_if_block = not(is_if_block)
-
-                elif 'ELIF' in line_stringified and not(is_if_block):
-                    elif_tok = get_token('ELIF', line)
-                    pos_start = elif_tok.pos_start.copy()
-                    pos_end = elif_tok.pos_end.copy()
-                    pos_end.col += count_length('ELIF')
-
-                    error = InvalidSyntaxError(pos_start, pos_end, f"Expected an if statement.",
-                                            text_by_line[elif_tok.pos_start.line - 1])
+                if 'IF' in line_stringified:
+                    if_count += 1
+                elif ('ELSE' in line_stringified) and (if_count != 0):
+                    if_count -= 1
+                elif ('ELIF' in line_stringified) and (if_count == 0):
+                    error = getError('ELIF', line, f"Expected an if statement.", text_by_line)
                     error.print_error()
                     sys.exit(1)
-
-                elif 'ELSE' in line_stringified and not(is_if_block):
-                    else_tok = get_token('ELSE', line)
-                    pos_start = else_tok.pos_start.copy()
-                    pos_end = else_tok.pos_end.copy()
-                    pos_end.col += count_length('ELSE')
-
-                    error = InvalidSyntaxError(pos_start, pos_end, f"Expected an if statement.",
-                                            text_by_line[else_tok.pos_start.line - 1])
+                elif ('ELSE' in line_stringified) and (if_count == 0):
+                    error = getError('ELSE', line, f"Expected an if statement.", text_by_line)
                     error.print_error()
                     sys.exit(1)
             else:
-                print("GRAMMAR ERROR?")
-                print(line)
+                initial_token = line[0]
+                print("Syntax Error Found!")
+                print(text_by_line[initial_token.pos_start.line - 1])
                 sys.exit(1)
+
+            ctr += 1
 
 
 def run_parser(filename, cnf_file, text):

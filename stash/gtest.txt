@@ -1,0 +1,12 @@
+E -> E P T | T M F | L E R | 'A' | 'B' | I A | I B | I Z | I O
+T -> T M F | L E R | 'A' | 'B' | I A | I B | I Z | I O
+F -> L E R | 'A' | 'B' | I A | I B | I Z | I O
+I -> 'A' | 'B' | I A | I B | I Z | I O | B
+A -> 'A'
+B -> 'B'
+Z -> '0'
+O -> '1'
+P -> '+'
+M -> '*'
+L -> '('
+R -> ')'

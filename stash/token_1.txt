@@ -29,27 +29,23 @@ token_rule = [
     (r'from\s',                 'FROM'),
     (r'import\s',               'IMPORT'),
     (r'pass',                   'PASS'),
-    (r'range',                  'RANGE'),
     (r'raise\s',                'RAISE'),
     (r'return\s',               'RETURN'),
     (r'while\s',                'WHILE'),
     (r'with\s',                 'WITH'),
-    (r'not\s',                  'NOT'),
-    (r'in\s',                   'IN'),
     # OTHERS ==================================== >>
     (r'\d+(\.\d*)?',            'NUMBER'),
     (r'[A-Za-z_][\w_]*',        'IDENTIFIER'),
     (r'->',                     'ARROW'),
     # OPERATORS ================================== >>
-    (r'\+',                     'MINUS'),
-    (r'\-',                     'PLUS'),
     (r'\+\+|\-\-',              'UNARY_OPR'),
-    (r'\*|\*\*|%|\/\/|\/',      'BINARY_OPR'),
-    (r'~',                      'BITWISE_NOT'),
+    (r'not\s',                  'NOT_OPR'),
+    (r'\+|\-|\*|\*\*|%|\/\/|\/','BINARY_OPR'),
     (r'>>|<<|~|&|\||\^',        'BITWISE_OPR'),
     (r'and|or',                 'LOGICAL_OPR'),
     (r'==|!=|>=|<=|>|<',        'COMPARISON'),
     (r'not in|is|is not',       'COMPARISON'),
+    (r'in\s',                   'IN'),
     # PUNCTUATIONS  ============================== >>
     (r'\=',                     'ASSIGN'),
     (r'\(',                     'LP'),
@@ -65,7 +61,6 @@ token_rule = [
     (r'\'',                     'SQUOTE'),
     (r'\"',                     'DQUOTE'),
     (r'\?',                     'QMARK'),
-    (r'\*',                     'STAR'),
 
     # CATCH EVERYTHING ELSE HERE
     (r'[^\s\t]*',               'UNCATEGORIZED'),

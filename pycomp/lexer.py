@@ -46,7 +46,8 @@ class Lexer:
 
         text_by_line = self.text.split("\n")
         col_incr = 0
-        is_comment = False
+        single_quote_comment = False; sq_token = ""
+        double_quote_comment = False; dq_token = ""
         line = []
         while self.pos.index < len(self.text):
             match = None
@@ -63,14 +64,20 @@ class Lexer:
                         pos_end.col += count_length(string)
                         
                         token = Token(tag, string, pos_start, pos_end)
-                        token_list.append(token)
-                        line.append(token)
+                        
+                        if tag == "SQ_COMMENT":
+                            single_quote_comment = not(single_quote_comment)
+                            sq_token = token
+                        elif tag == "DQ_COMMENT":
+                            double_quote_comment = not(double_quote_comment)
+                            dq_token = token
+                        elif not(single_quote_comment or double_quote_comment):
+                            token_list.append(token)
+                            line.append(token)
 
-                        if tag in ('SQ_COMMENT', 'DQ_COMMENT'):
-                            is_comment = not(is_comment)
                     break
 
-            if tag == 'UNCATEGORIZED' and not(is_comment): 
+            if tag == 'UNCATEGORIZED' and not(single_quote_comment or double_quote_comment): 
                 error = IllegalCharError(pos_start, pos_end, f"Character not allowed",
                                         text_by_line[self.pos.line - 1])
                 error.print_error()
@@ -85,6 +92,23 @@ class Lexer:
                     self.pos.col = 0
                     self.pos.line += 1
 
+        # Kalau long comment belum selesai
+        if single_quote_comment:
+            error = IllegalCharError(sq_token.pos_start, sq_token.pos_end, 
+                                    f"EOF while scanning triple-quoted string literal",
+                                    text_by_line[sq_token.pos_start.line - 1])
+            error.print_error()
+            sys.exit(1)
+            
+        # Kalau long comment belum selesai
+        if double_quote_comment:
+            error = IllegalCharError(dq_token.pos_start, dq_token.pos_end, 
+                                    f"EOF while scanning triple-quoted string literal",
+                                    text_by_line[dq_token.pos_start.line - 1])
+            error.print_error()
+            sys.exit(1)
+
+        
         return text_by_line, tokenized_lines
 
 def run_lexer(filename, text):

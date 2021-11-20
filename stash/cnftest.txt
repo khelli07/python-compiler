@@ -1,0 +1,41 @@
+A -> 'A'
+B -> 'B'
+E -> 'A'
+E -> I O
+E -> E P_EXT0
+E -> I B
+E -> I Z
+E -> L E_EXT2
+E -> T M_EXT1
+E -> I A
+E -> 'B'
+E_EXT2 -> E R
+F -> I O
+F -> 'B'
+F -> I B
+F -> I Z
+F -> L E_EXT2
+F -> 'A'
+F -> I A
+I -> 'B'
+I -> I O
+I -> I B
+I -> 'A'
+I -> I Z
+I -> I A
+L -> '('
+M -> '*'
+M_EXT1 -> M F
+O -> '1'
+P -> '+'
+P_EXT0 -> P T
+R -> ')'
+T -> I O
+T -> I B
+T -> 'B'
+T -> L E_EXT2
+T -> T M_EXT1
+T -> I Z
+T -> 'A'
+T -> I A
+Z -> '0'
