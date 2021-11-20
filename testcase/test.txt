@@ -1,11 +1,2 @@
-x = 1 + 2
-y >>= 2
-z <<= 2
-
-x += z
-y =+ z 
-x & y 
-x | y
-x ^ ~y
-a = b % c 
-x = y // z
+else:
+    return

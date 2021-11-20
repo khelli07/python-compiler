@@ -14,16 +14,14 @@ def retrieve_grammar(filename):
     The S produciton is not unique. There maybe another rule with S, e.g. ['S', 'C', 'D']. 
     It depends on the grammar input file.
     '''
-
     with open(filename) as cfg:
         lines = cfg.readlines()
     
-    # LOG stands for "List of Grammar"
-    log = [ln.replace("->", "").split() for ln in lines]
-    log = [grammar for grammar in log if len(grammar) != 0]
-    return log
+    grammar_list = [ln.replace("->", "").split() for ln in lines]
+    grammar_list = [grammar for grammar in grammar_list if len(grammar) != 0]
+    return grammar_list
 
-def subs_unit_prod(rule, log):
+def subs_unit_prod(rule, grammar_list):
     ''' 
     Rule has a length of two, let's say ['A', 'B']
     which is the same as A -> B. We want to eliminate this unit production.
@@ -35,7 +33,7 @@ def subs_unit_prod(rule, log):
     The function will return only new rules that corresponds to the input rule.
     '''
     nrlist = []
-    for grammar in log:
+    for grammar in grammar_list:
         new_rule = [rule[0]]
         if grammar[0] == rule[1] and grammar != rule:
             new_rule[1:] = grammar[1:]
@@ -44,24 +42,24 @@ def subs_unit_prod(rule, log):
     return nrlist
 
 
-def handle_unit_production(list_of_grammar):
+def handle_unit_production(grammar_list):
     '''
     Remove all unit production in the form of A -> B with substitution.
     The function will return new list of grammar which all unit productions
     have been substituted.
     '''
-    rules = copy.deepcopy(list_of_grammar)
-    rlength = len(list_of_grammar)
+    rules = copy.deepcopy(grammar_list)
+    rlength = len(grammar_list)
     for i in range(rlength):
         if (len(rules[i]) == 2) and not(isTerminal(rules[i][1])):
-            new_rule = subs_unit_prod(rules[i], list_of_grammar)
+            new_rule = subs_unit_prod(rules[i], grammar_list)
             rules.pop(i)
             rules.extend(new_rule)
 
     return rules
                     
 
-def CFG2CNF(list_of_grammar):
+def CFG2CNF(grammar_list):
     '''
     Return CFG in the form of Chomsky Normal Form
     in which the only productions allowed are:
@@ -69,7 +67,7 @@ def CFG2CNF(list_of_grammar):
     2. B -> b, where b is a terminal.
     Note that this function does not handle epsilon productions.
     '''
-    cnf_rules = copy.deepcopy(list_of_grammar)
+    cnf_rules = copy.deepcopy(grammar_list)
     rlength = len(cnf_rules)
 
     # Handle more than two variables and/or terminals
@@ -102,8 +100,8 @@ def CFG2CNF(list_of_grammar):
     return cnf_rules
 
 def run_converter(filein, fileout):
-    log = retrieve_grammar(filein)
-    cnf_rules = CFG2CNF(log)
+    grammar_list = retrieve_grammar(filein)
+    cnf_rules = CFG2CNF(grammar_list)
 
     f = open(fileout, "w")
 

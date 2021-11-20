@@ -12,10 +12,11 @@ class Error:
         self.txtline = txtline
 
     def print_error(self):
-        print(f"{self.name} Error: {self.message}")
-        print(f"File {self.pos_start.filename}, line {self.pos_start.line + 1}.")
         print(self.txtline)
-        print(SPACE * (self.pos_start.col) + '^' * (self.pos_end.col - self.pos_start.col))
+        print(SPACE * (self.pos_start.col) + '^')
+        print(f"{self.name} Error: {self.message}")
+        print(f"In file {self.pos_start.filename}, line {self.pos_start.line + 1}.")
+        # print(SPACE * (self.pos_start.col) + '^' * (self.pos_end.col - self.pos_start.col))
 
 class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, message, txtline):

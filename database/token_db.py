@@ -24,7 +24,7 @@ token_rule = [
     (r'def\s',                  'DEF'),
     (r'if\s',                   'IF'),
     (r'elif\s',                 'ELIF'),
-    (r'else\s|else:',           'ELSE'),
+    (r'else',                   'ELSE'),
     (r'for\s',                  'FOR'),
     (r'from\s',                 'FROM'),
     (r'import\s',               'IMPORT'),
@@ -64,5 +64,5 @@ token_rule = [
     (r'\?',                     'QMARK'),
 
     # CATCH EVERYTHING ELSE HERE
-    (r'.*',                     'UNCATEGORIZED'),
+    (r'[^\s\t]*',               'UNCATEGORIZED'),
 ]
