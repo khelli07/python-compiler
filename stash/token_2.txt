@@ -11,6 +11,8 @@ token_rule = [
     # WHITESPACE AND COMMENTS ==================== >>
     (r'[\s\t]',                  None),
     (r'\\n',                    'NEWLINE'),
+    (r'\'[^\n]+\'',             'STRING'),
+    (r'\"[^\n]+\"',             'STRING'),
     (r'#[^\n]*',                'LN_COMMENT'),
     (r'\'{3}',                  'SQ_COMMENT'),
     (r'\"{3}',                  'DQ_COMMENT'),
