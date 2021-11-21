@@ -4,7 +4,7 @@
 import itertools, sys
 from pycomp.lexer import run_lexer
 from pycomp.error import InvalidSyntaxError, getError
-from pycomp.cfg2cnf import retrieve_grammar
+from pycomp.CFG2CNF import retrieve_grammar
 from pycomp.utils import count_length, get_tag_string, get_token
 
 def subs_grammar(union, production, grammar_list):
