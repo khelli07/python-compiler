@@ -27,7 +27,7 @@ class InvalidSyntaxError(Error):
     def __init__(self, pos_start, pos_end, message, txtline):
         super().__init__("Syntax", pos_start, pos_end, message, txtline)
 
-def getError(name, line, message, text_by_line):
+def get_error(name, line, message, text_by_line):
     token = get_token(name, line)
     pos_start = token.pos_start.copy()
     pos_end = token.pos_end.copy()

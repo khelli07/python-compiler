@@ -3,9 +3,9 @@
 # =================== >>
 import itertools, sys
 from pycomp.lexer import run_lexer
-from pycomp.error import InvalidSyntaxError, getError
-from pycomp.cfg2cnf import retrieve_grammar
-from pycomp.utils import count_length, get_tag_string, get_token
+from pycomp.error import get_error
+from pycomp.cfg2cnf import grammar_to_list
+from pycomp.utils import get_tag_string
 
 def subs_grammar(union, production, grammar_list):
     '''
@@ -53,11 +53,17 @@ class Parser:
                         subs_grammar(union, production, cnf_grammar)
                     cyk_table[i][j] = [var for var in set(union)]
 
+
+        # for i in range(length - 1, -1, -1):
+        #     for j in range(length):
+        #         print(f"{cyk_table[i][j]}", end="  ")
+        #     print()
+
         return (cyk_table[length - 1][0] != [])
 
     def parse_text(self):
         text_by_line, tokenized_lines = run_lexer(self.filename, self.text)
-        cnf_grammar = retrieve_grammar(self.cnf_file)
+        cnf_grammar = grammar_to_list(self.cnf_file)
 
         if_count = 0
         ctr = 0
@@ -73,17 +79,19 @@ class Parser:
                 elif ('ELSE' in line_stringified) and (if_count != 0):
                     if_count -= 1
                 elif ('ELIF' in line_stringified) and (if_count == 0):
-                    error = getError('ELIF', line, f"Expected an if statement.", text_by_line)
+                    error = get_error('ELIF', line, f"Expected an if statement", text_by_line)
                     error.print_error()
                     sys.exit(1)
                 elif ('ELSE' in line_stringified) and (if_count == 0):
-                    error = getError('ELSE', line, f"Expected an if statement.", text_by_line)
+                    error = get_error('ELSE', line, f"Expected an if statement", text_by_line)
                     error.print_error()
                     sys.exit(1)
             else:
                 initial_token = line[0]
-                print("Syntax Error Found!")
                 print(text_by_line[initial_token.pos_start.line - 1])
+                print("Syntax Error Found!")
+                print(initial_token.pos_start)
+                print(line)
                 sys.exit(1)
 
             ctr += 1

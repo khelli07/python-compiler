@@ -3,7 +3,7 @@
 # =================== >>
 import sys, re
 from database.token_db import token_rule
-from pycomp.error import IllegalCharError
+from pycomp.error import IllegalCharError, InvalidSyntaxError
 from pycomp.utils import count_length
 
 class Token:
@@ -29,7 +29,7 @@ class Position:
         self.filetext = filetext
 
     def __repr__(self):
-        return f"In file {self.filename}, line: {self.line + 1}, column: {self.col}"
+        return f"In file {self.filename}, line: {self.line}, column: {self.col}"
 
     def copy(self):
         return Position(self.index, self.line, self.col, self.filename, self.filetext)
@@ -37,7 +37,7 @@ class Position:
 class Lexer:
     def __init__(self, filename, text):
         self.filename = filename
-        self.text = text
+        self.text = text + "\n"
         self.pos = Position(0, 1, 0, filename, text)
 
     def tokenize(self, rules=token_rule):
@@ -81,6 +81,7 @@ class Lexer:
                 error = IllegalCharError(pos_start, pos_end, f"Character not allowed",
                                         text_by_line[self.pos.line - 1])
                 error.print_error()
+                print(line)
                 sys.exit(1)
             else:
                 self.pos.col += col_incr
@@ -94,7 +95,7 @@ class Lexer:
 
         # Kalau long comment belum selesai
         if single_quote_comment:
-            error = IllegalCharError(sq_token.pos_start, sq_token.pos_end, 
+            error = InvalidSyntaxError(sq_token.pos_start, sq_token.pos_end, 
                                     f"EOF while scanning triple-quoted string literal",
                                     text_by_line[sq_token.pos_start.line - 1])
             error.print_error()
@@ -102,7 +103,7 @@ class Lexer:
             
         # Kalau long comment belum selesai
         if double_quote_comment:
-            error = IllegalCharError(dq_token.pos_start, dq_token.pos_end, 
+            error = InvalidSyntaxError(dq_token.pos_start, dq_token.pos_end, 
                                     f"EOF while scanning triple-quoted string literal",
                                     text_by_line[dq_token.pos_start.line - 1])
             error.print_error()

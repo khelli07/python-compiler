@@ -1,41 +1,41 @@
+E -> 'A'
+E -> 'B'
+E -> I A
+E -> I B
+E -> L E2
+E -> T M1
+E -> I O
+E -> E P0
+E -> I Z
+T -> 'A'
+T -> 'B'
+T -> I A
+T -> I B
+T -> L E2
+T -> T M1
+T -> I O
+T -> I Z
+F -> 'A'
+F -> 'B'
+F -> I A
+F -> I B
+F -> L E2
+F -> I O
+F -> I Z
+I -> 'A'
+I -> 'B'
+I -> I A
+I -> I B
+I -> I O
+I -> I Z
 A -> 'A'
 B -> 'B'
-E -> 'A'
-E -> I O
-E -> E P_EXT0
-E -> I B
-E -> I Z
-E -> L E_EXT2
-E -> T M_EXT1
-E -> I A
-E -> 'B'
-E_EXT2 -> E R
-F -> I O
-F -> 'B'
-F -> I B
-F -> I Z
-F -> L E_EXT2
-F -> 'A'
-F -> I A
-I -> 'B'
-I -> I O
-I -> I B
-I -> 'A'
-I -> I Z
-I -> I A
-L -> '('
-M -> '*'
-M_EXT1 -> M F
+Z -> '0'
 O -> '1'
 P -> '+'
-P_EXT0 -> P T
+M -> '*'
+L -> '('
 R -> ')'
-T -> I O
-T -> I B
-T -> 'B'
-T -> L E_EXT2
-T -> T M_EXT1
-T -> I Z
-T -> 'A'
-T -> I A
-Z -> '0'
+P0 -> P T
+M1 -> M F
+E2 -> E R

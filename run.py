@@ -5,7 +5,7 @@ from pycomp.lexer import run_lexer
 
 if __name__ == '__main__':
     filename = sys.argv[1]
-    file = open(filename)
+    file = open(filename, encoding="utf8")
     text = file.read()
     file.close()
     
