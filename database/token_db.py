@@ -47,8 +47,9 @@ token_rule = [
     # OPERATORS ================================== >>
     (r'\-',                     'MINUS'),
     (r'\+',                     'PLUS'),
+    (r'\*',                     'STAR'),
     (r'\+\+|\-\-',              'UNARY_OPR'),
-    (r'\*|\*\*|%|\/\/|\/',      'BINARY_OPR'),
+    (r'\*\*|%|\/\/|\/',         'BINARY_OPR'),
     (r'~',                      'BITWISE_NOT'),
     (r'>>|<<|~|&|\||\^',        'BITWISE_OPR'),
     (r'==|!=|>=|<=|>|<',        'COMPARISON'),
@@ -67,7 +68,6 @@ token_rule = [
     (r'\'',                     'SQUOTE'),
     (r'\"',                     'DQUOTE'),
     (r'\?',                     'QMARK'),
-    (r'\*',                     'STAR'),
 
     # CATCH EVERYTHING ELSE HERE
     (r'[^\s\t]*',               'UNCATEGORIZED'),
