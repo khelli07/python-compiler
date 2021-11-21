@@ -1,0 +1,12 @@
+S -> NP VP
+VP -> VP PP 
+VP -> V NP 
+VP -> 'EATS'
+PP -> P NP
+NP -> DET N 
+NP -> 'SHE'
+V -> 'EATS'
+P -> 'WITH'
+N -> 'FISH'
+N -> 'FORK'
+DET -> 'A'
