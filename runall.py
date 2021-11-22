@@ -1,3 +1,4 @@
+import os
 from pycomp.cfg2cnf import run_converter
 from pycomp.cyk_parser import run_parser
 from pycomp.lexer import run_lexer
@@ -7,8 +8,9 @@ if __name__ == '__main__':
     run_converter("database/CFG.txt", "database/CNF.txt")
     cnf_file = 'database/CNF.txt'
 
-    for i in range(1,10):
-        filename = folder_name + f"TC{i}.txt"
+    listdir = os.listdir("testcase")
+    for filename in listdir:
+        filename = folder_name + filename
         file = open(filename, encoding="utf8")
         text = file.read()
         file.close()
