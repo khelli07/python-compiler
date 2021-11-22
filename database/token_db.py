@@ -48,7 +48,6 @@ token_rule = [
     (r'\-',                     'MINUS'),
     (r'\+',                     'PLUS'),
     (r'\*',                     'STAR'),
-    (r'\+\+|\-\-',              'UNARY_OPR'),
     (r'\*\*|%|\/\/|\/',         'BINARY_OPR'),
     (r'~',                      'BITWISE_NOT'),
     (r'>>|<<|~|&|\||\^',        'BITWISE_OPR'),
