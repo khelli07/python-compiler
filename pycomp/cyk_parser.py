@@ -43,10 +43,10 @@ class Parser:
                     lprod = []
                     x = 0; y = j + 1
                     while (x != i):
-                        cartesian_prod = list(itertools.product(cyk_table[x][j], cyk_table[i - x - 1][y]))
+                        cartesian_prod = list(itertools.product(cyk_table[x][j], 
+                                                                cyk_table[i - x - 1][y]))
                         lprod.extend(cartesian_prod)
-                        x += 1
-                        y += 1
+                        x += 1; y += 1
                     
                     union = []
                     for production in lprod:
@@ -68,7 +68,7 @@ class Parser:
         if_count = 0
         ctr = 0
         for line in tokenized_lines:
-            print(f"Checking line {ctr + 1}...")
+            # print(f"Checking line {ctr + 1}...")
 
             is_accepted = self.parse_cyk(line, cnf_grammar)
             line_stringified = [get_tag_string(token.tag, line) for token in line]

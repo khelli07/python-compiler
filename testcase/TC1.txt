@@ -8,7 +8,7 @@ def payment():
 	VIRTUAL_ACCOUNT_LENGTH = 10
 	data = get_json()
 	
-	shopping_cart_id = data[shopping_cart_id]
+    shopping_cart_id = data[shopping_cart_id]
     
     virtual_account = 1234
 	for i in range(VIRTUAL_ACCOUNT_LENGTH):
