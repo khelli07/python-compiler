@@ -88,9 +88,9 @@ class Parser:
                     sys.exit(1)
             else:
                 initial_token = line[0]
-                print(text_by_line[initial_token.pos_start.line - 1])
-                print("Syntax Error Found!")
                 print(initial_token.pos_start)
+                print(text_by_line[initial_token.pos_start.line - 1])
+                print("\nSyntax Error Found!")
                 print(line)
                 sys.exit(1)
 

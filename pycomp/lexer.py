@@ -29,7 +29,7 @@ class Position:
         self.filetext = filetext
 
     def __repr__(self):
-        return f"In file {self.filename}, line: {self.line}, column: {self.col}"
+        return f"In file {self.filename}, line: {self.line}"
 
     def copy(self):
         return Position(self.index, self.line, self.col, self.filename, self.filetext)

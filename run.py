@@ -8,8 +8,8 @@ if __name__ == '__main__':
     cnf_file = 'database/CNF.txt'
 
     for i in range(1,10):
-        filename = f"TC{i}.txt"
-        file = open(folder_name + filename, encoding="utf8")
+        filename = folder_name + f"TC{i}.txt"
+        file = open(filename, encoding="utf8")
         text = file.read()
         file.close()
         
