@@ -2,9 +2,9 @@
 # LEXER
 # =================== >>
 import sys, re
-from database.token_db import token_rule
+from database.token_db import token_rule, BRACKETS
 from pycomp.error import IllegalCharError, InvalidSyntaxError
-from pycomp.utils import count_length
+from pycomp.utils import count_length, is_bracket_match
 
 class Token:
     def __init__(self, tag, value=None, pos_start=None, pos_end=None):
@@ -46,9 +46,8 @@ class Lexer:
 
         text_by_line = self.text.split("\n")
         
-        paren_pair_ctr = 0; paren_token = "" 
-        sb_pair_ctr = 0; sb_token = "" 
-        cb_pair_ctr = 0; cb_token = ""
+        bracket_stack = []
+        
         sq_comment = False; sq_token = ""
         dq_comment = False; dq_token = ""
         eof_error = False
@@ -81,12 +80,15 @@ class Lexer:
                             dq_token = token
                         elif not(sq_comment or dq_comment):
                             # Handle bracket
-                            if tag == 'LP': paren_pair_ctr += 1; paren_token = token
-                            elif tag == 'RP': paren_pair_ctr -= 1; paren_token = token
-                            elif tag == 'LSB': sb_pair_ctr += 1; sb_token = token
-                            elif tag == 'RSB': sb_pair_ctr -= 1; sb_token = token
-                            elif tag == 'LCB': cb_pair_ctr += 1; cb_token = token
-                            elif tag == 'RCB': cb_pair_ctr -= 1; cb_token = token
+                            if tag in BRACKETS:
+                                if (len(bracket_stack) == 0):
+                                    bracket_stack.append(token)
+                                else:
+                                    stack_top = bracket_stack[-1]
+                                    if is_bracket_match(stack_top.tag, tag):
+                                        bracket_stack.pop()
+                                    else:
+                                        bracket_stack.append(token)
 
                             token_list.append(token)
                             line.append(token)
@@ -98,12 +100,6 @@ class Lexer:
                                             text_by_line[self.pos.line - 1])
                     error.print_error()
                     sys.exit(1)
-            elif (paren_pair_ctr < 0) or (sb_pair_ctr < 0) or (cb_pair_ctr < 0):
-                message = f"Did you miss the open bracket? Unmatched '{token.value}'"
-                error = InvalidSyntaxError(pos_start, pos_end, message,
-                                        text_by_line[self.pos.line - 1])
-                error.print_error()
-                sys.exit(1)
             else:
                 self.pos.col += col_incr
                 self.pos.index = match.end(0)
@@ -119,12 +115,12 @@ class Lexer:
             elif dq_token: error_token = dq_token
             message = "EOF while scanning triple-quoted string literal"
             eof_error = True
-
-        elif (paren_pair_ctr > 0) or (sb_pair_ctr > 0) or (cb_pair_ctr > 0):
-            if paren_pair_ctr > 0: error_token = paren_token            
-            elif sb_pair_ctr > 0: error_token = sb_token            
-            elif cb_pair_ctr > 0: error_token = cb_token 
-            message = f"Did you forget to close the bracket? Unmatched '{error_token.value}'"
+        elif len(bracket_stack) != 0:
+            error_token = bracket_stack.pop()
+            if error_token.tag in ['LP', 'LSB', 'LCB']:
+                message = f"Did you forget to close the bracket? Unmatched '{error_token.value}'"
+            elif error_token.tag in ['RP', 'RSB', 'RCB']:
+                message = f"Did you forget to open the bracket? Unmatched '{error_token.value}'"
             eof_error = True
 
         if (eof_error):
