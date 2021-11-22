@@ -8,7 +8,7 @@ This code is a tester for Cocke-Younger-Kasami Algorithm
 The token sample is taken from Wikipedia.
 '''
 # CNF
-grammar_list = grammar_to_list("./stash/CNF_T.txt")
+grammar_list = grammar_to_list("./stash/CNF_Wiki.txt")
 
 # Take sample token
 sample_token = "SHE EATS A FISH WITH A FORK"
