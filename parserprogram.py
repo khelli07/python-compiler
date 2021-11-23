@@ -1,6 +1,6 @@
 # lewat argumen
 
-from pycomp.CFG2CNF import run_converter
+from pycomp.cfg2cnf import run_converter
 from pycomp.cyk_parser import run_parser
 from pycomp.lexer import run_lexer
 
@@ -9,7 +9,6 @@ import sys
 import argparse
 
 filename = sys.argv[1]
-print(filename)
 
 run_converter("database/CFG.txt", "database/CNF.txt")
 cnf_file = 'database/CNF.txt'
