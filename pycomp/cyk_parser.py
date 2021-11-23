@@ -84,6 +84,7 @@ class Parser:
                 print(initial_token.pos_start)
                 print(text_by_line[initial_token.pos_start.line - 1])
                 print("Syntax Error Found!")
+                print(line)
                 sys.exit(1)
 
             ctr += 1
