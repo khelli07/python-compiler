@@ -14,7 +14,7 @@ def get_rule_category(rule: dict) -> str:
             return TERMINAL_RULE_KEY
         else:
             return UNARY_RULE_KEY
-    elif len(rule_product) == 2:
+    elif len(rule_product) = 2:
         return BINARY_RULE_KEY
     else:
         return N_ARIES_RULE_KEY

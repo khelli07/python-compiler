@@ -4,3 +4,6 @@ dict2 = {"a": ["b", "c"],"e": ("f", z), "g": "h"}
 funcname([1, 2, 3], a="10")
 
 print("tes" + True)
+x = 5 * 2 + (5 + 2 * (3 + 4)
+
+print(x)
