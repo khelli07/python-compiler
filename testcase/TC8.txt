@@ -3,6 +3,8 @@ a = [1,2,3]
 for i in range(len(a)):
 	a[i] += 3
 	
+a3  = 3
+2abc = 123
 for numb in a:
 	print(numb)
 	
