@@ -16,7 +16,7 @@ def subs_unit_prod(rule, grammar_dict):
     which is the same as A -> B. We want to eliminate this unit production.
     For instance, if B -> CD | EF then we make ['A', 'C', 'D'] and ['A', 'E', 'F'].
 
-    Remember, the input should already be in the form of list/dict,
+    Remember, the input should already be in the form of dict,
     i.e. B -> CD | EF is B -> CD; B -> EF (in the file)
     or ['B', 'C', 'D'] and ['B', 'E', 'F'] (in the list of grammar)
     The function will return only new rules that corresponds to the input rule.
@@ -57,6 +57,12 @@ def grammar_to_list(filename):
     return grammar_list
 
 def grammar_to_dict(filename):
+    '''
+    Similar to function above, but in dictionary form.
+    For instance, the output of S -> A B | C will looks like:
+    grammar_dict = {'S' : [['S', 'A', 'B],
+                        ['S', 'C]], ...}
+    '''
     with open(filename) as cfg:
         lines = cfg.readlines()
     
@@ -83,7 +89,8 @@ def grammar_to_dict(filename):
 def handle_unit_production(grammar_dict):
     '''
     Remove all unit production in the form of A -> B with substitution.
-    The function will return new list of grammar which all unit productions
+    I.S. There maybe unit production in grammar dictionary
+    F.S. No more unit production, all unit productions
     have been substituted.
     '''
     repeat = True
@@ -141,7 +148,6 @@ def CFG2CNF(grammar_dict):
 
                 # Add rule to the end
                 rules[i].append(new_rule)
-                # cnf_rules[key].insert(i + 1, new_product)
     
     ctr = 0
     tmp = []
