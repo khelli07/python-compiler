@@ -17,7 +17,6 @@ class Error:
         print(self.txtline)
         print(SPACE * (self.pos_start.col) + '^')
         print(f"{self.name} Error: {self.message}")
-        # print(SPACE * (self.pos_start.col) + '^' * (self.pos_end.col - self.pos_start.col))
 
 class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, message, txtline):

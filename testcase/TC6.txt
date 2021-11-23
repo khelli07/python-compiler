@@ -1,5 +1,5 @@
-input1 = input(Apakah, kamu, belajar, "?", yatidak)
-input2 = input(Apakah, kamu, deadliner, "?", yatidak)
+input1 = input(Apakah, kamu, lelah, "?", "ya/tidak")
+input2 = input(Apakah, kamu, deadliner, "?", "ya/tidak"))
 
 if input1lower() == ya:
 	belajar = True

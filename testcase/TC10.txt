@@ -1,1 +1,6 @@
-#1 + True * "test"
+dict1 = {"a": "b", "c": "d"}
+dict2 = {"a": ["b", "c"],"e": ("f", z), "g": "h"}
+
+funcname([1, 2, 3], a="10")
+
+print("tes" + True)
