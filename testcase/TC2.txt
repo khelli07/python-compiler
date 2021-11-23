@@ -15,7 +15,7 @@ def extract_text_from_image():
 	time_start = timeperf_counter()
 	text = pytesseractimage_to_string(Imageopen(IMAGE_INPUT_NAME))
 	with open(FILE_OUTPUT_NAME, w) as f_out:
-		for c in text:
+		for c in text
 			cii = d(c)
 			if cii == PIPE_ASCII:
 				f_outwrite(I)
