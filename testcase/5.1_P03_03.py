@@ -1,0 +1,1 @@
+# https://itbdsti.sharepoint.com/sites/PraktikumKU1102Sem120212022/Class%20Materials/Programming/Modul/python.pdf\

@@ -1,0 +1,242 @@
+=====
+testing testcase/3.5_P02_01.py...
+=====
+testcase/3.5_P02_01.py
+Checking testcase/3.5_P02_01.py...
+In file testcase/3.5_P02_01.py, line: 5
+while(i > 0):
+
+Syntax Error Found!
+[[IDENTIFIER: while], [LP: (], [IDENTIFIER: i], [COMPARISON: >], [NUMBER: 0], [RP: )], [COLON: :]]
+
+=====
+testing testcase/5.1_P01_01.py...
+=====
+testcase/5.1_P01_01.py
+Checking testcase/5.1_P01_01.py...
+In file testcase/5.1_P01_01.py, line: 12
+b = (n // 10) - (a * 10)
+
+Syntax Error Found!
+[[IDENTIFIER: b], [ASSIGN: =], [LP: (], [IDENTIFIER: n], [BINARY_OPR: //], [NUMBER: 10], [RP: )], [MINUS: -], [LP: (], [IDENTIFIER: a], [STAR: *], [NUMBER: 10], [RP: )]]
+
+=====
+testing testcase/5.1_P01_02.py...
+=====
+testcase/5.1_P01_02.py
+Checking testcase/5.1_P01_02.py...
+In file testcase/5.1_P01_02.py, line: 14
+d = (b ** 2) - (4 * a * c)
+
+Syntax Error Found!
+[[IDENTIFIER: d], [ASSIGN: =], [LP: (], [IDENTIFIER: b], [STAR: *], [STAR: *], [NUMBER: 2], [RP: )], [MINUS: -], [LP: (], [NUMBER: 4], [STAR: *], [IDENTIFIER: a], [STAR: *], [IDENTIFIER: c], [RP: )]]
+
+=====
+testing testcase/5.1_P01_03.py...
+=====
+testcase/5.1_P01_03.py
+Checking testcase/5.1_P01_03.py...
+In file testcase/5.1_P01_03.py, line: 46
+if (r > k) & (r > d):
+
+Syntax Error Found!
+[[IF: if ], [LP: (], [IDENTIFIER: r], [COMPARISON: >], [IDENTIFIER: k], [RP: )], [BITWISE_OPR: &], [LP: (], [IDENTIFIER: r], [COMPARISON: >], [IDENTIFIER: d], [RP: )], [COLON: :]]
+
+=====
+testing testcase/5.1_P02_01.py...
+=====
+testcase/5.1_P02_01.py
+Checking testcase/5.1_P02_01.py...
+In file testcase/5.1_P02_01.py, line: 3
+        if (x/2)**2 + (((5*y)/4) - (2 * (abs(x))**(1/2)))**2 < 120:
+
+Syntax Error Found!
+[[IF: if ], [LP: (], [IDENTIFIER: x], [BINARY_OPR: /], [NUMBER: 2], [RP: )], [STAR: *], [STAR: *], [NUMBER: 2], [PLUS: +], [LP: (], [LP: (], [LP: (], [NUMBER: 5], [STAR: *], [IDENTIFIER: y], [RP: )], [BINARY_OPR: /], [NUMBER: 4], [RP: )], [MINUS: -], [LP: (], [NUMBER: 2], [STAR: *], [LP: (], [IDENTIFIER: abs], [LP: (], [IDENTIFIER: x], [RP: )], [RP: )], [STAR: *], [STAR: *], [LP: (], [NUMBER: 1], [BINARY_OPR: /], [NUMBER: 2], [RP: )], [RP: )], [RP: )], [STAR: *], [STAR: *], [NUMBER: 2], [COMPARISON: <], [NUMBER: 120], [COLON: :]]
+
+=====
+testing testcase/5.1_P02_02.py...
+=====
+testcase/5.1_P02_02.py
+Checking testcase/5.1_P02_02.py...
+In file testcase/5.1_P02_02.py, line: 7
+	if (p * l * t) > maxvol:
+
+Syntax Error Found!
+[[IF: if ], [LP: (], [IDENTIFIER: p], [STAR: *], [IDENTIFIER: l], [STAR: *], [IDENTIFIER: t], [RP: )], [COMPARISON: >], [IDENTIFIER: maxvol], [COLON: :]]
+
+=====
+testing testcase/5.1_P02_03.py...
+=====
+testcase/5.1_P02_03.py
+Checking testcase/5.1_P02_03.py...
+In file testcase/5.1_P02_03.py, line: 8
+		if (jam * 30 + e * 6 < menit * 6):
+
+Syntax Error Found!
+[[IF: if ], [LP: (], [IDENTIFIER: jam], [STAR: *], [NUMBER: 30], [PLUS: +], [IDENTIFIER: e], [STAR: *], [NUMBER: 6], [COMPARISON: <], [IDENTIFIER: menit], [STAR: *], [NUMBER: 6], [RP: )], [COLON: :]]
+
+=====
+testing testcase/5.1_P03_01.py...
+=====
+testcase/5.1_P03_01.py
+Checking testcase/5.1_P03_01.py...
+In file testcase/5.1_P03_01.py, line: 8
+arr = [0 for i in range(n)]
+
+Syntax Error Found!
+[[IDENTIFIER: arr], [ASSIGN: =], [LSB: [], [NUMBER: 0], [FOR: for ], [IDENTIFIER: i], [IN: in ], [IDENTIFIER: range], [LP: (], [IDENTIFIER: n], [RP: )], [RSB: ]]]
+
+=====
+testing testcase/5.1_P03_02.py...
+=====
+testcase/5.1_P03_02.py
+Checking testcase/5.1_P03_02.py...
+In file testcase/5.1_P03_02.py, line: 4
+arr = [0 for i in range(n)]
+
+Syntax Error Found!
+[[IDENTIFIER: arr], [ASSIGN: =], [LSB: [], [NUMBER: 0], [FOR: for ], [IDENTIFIER: i], [IN: in ], [IDENTIFIER: range], [LP: (], [IDENTIFIER: n], [RP: )], [RSB: ]]]
+
+=====
+testing testcase/5.1_P03_03.py...
+=====
+testcase/5.1_P03_03.py
+Checking testcase/5.1_P03_03.py...
+Yay, your program is accepted!
+
+=====
+testing testcase/H01_01.py...
+=====
+testcase/H01_01.py
+Checking testcase/H01_01.py...
+Yay, your program is accepted!
+
+=====
+testing testcase/H01_02.py...
+=====
+testcase/H01_02.py
+Checking testcase/H01_02.py...
+Yay, your program is accepted!
+
+=====
+testing testcase/H01_03.py...
+=====
+testcase/H01_03.py
+Checking testcase/H01_03.py...
+In file testcase/H01_03.py, line: 12
+	if x % 2 == 0:
+
+Syntax Error Found!
+[[IF: if ], [IDENTIFIER: x], [BINARY_OPR: %], [NUMBER: 2], [COMPARISON: ==], [NUMBER: 0], [COLON: :]]
+
+=====
+testing testcase/H02_01.py...
+=====
+testcase/H02_01.py
+Checking testcase/H02_01.py...
+In file testcase/H02_01.py, line: 13
+for i in range(1, n+1):
+
+Syntax Error Found!
+[[FOR: for ], [IDENTIFIER: i], [IN: in ], [IDENTIFIER: range], [LP: (], [NUMBER: 1], [COMMA: ,], [IDENTIFIER: n], [PLUS: +], [NUMBER: 1], [RP: )], [COLON: :]]
+
+=====
+testing testcase/H02_02.py...
+=====
+testcase/H02_02.py
+Checking testcase/H02_02.py...
+Yay, your program is accepted!
+
+=====
+testing testcase/H02_03.py...
+=====
+testcase/H02_03.py
+Checking testcase/H02_03.py...
+In file testcase/H02_03.py, line: 17
+    if x % i == 0:
+
+Syntax Error Found!
+[[IF: if ], [IDENTIFIER: x], [BINARY_OPR: %], [IDENTIFIER: i], [COMPARISON: ==], [NUMBER: 0], [COLON: :]]
+
+=====
+testing testcase/H03_01.py...
+=====
+testcase/H03_01.py
+Checking testcase/H03_01.py...
+In file testcase/H03_01.py, line: 16
+arr = [0 for i in range(n)]
+
+Syntax Error Found!
+[[IDENTIFIER: arr], [ASSIGN: =], [LSB: [], [NUMBER: 0], [FOR: for ], [IDENTIFIER: i], [IN: in ], [IDENTIFIER: range], [LP: (], [IDENTIFIER: n], [RP: )], [RSB: ]]]
+
+=====
+testing testcase/H03_02.py...
+=====
+testcase/H03_02.py
+Checking testcase/H03_02.py...
+In file testcase/H03_02.py, line: 20
+freq_a = [0 for i in range(10)]
+
+Syntax Error Found!
+[[IDENTIFIER: freq_a], [ASSIGN: =], [LSB: [], [NUMBER: 0], [FOR: for ], [IDENTIFIER: i], [IN: in ], [IDENTIFIER: range], [LP: (], [NUMBER: 10], [RP: )], [RSB: ]]]
+
+=====
+testing testcase/H03_03.py...
+=====
+testcase/H03_03.py
+Checking testcase/H03_03.py...
+In file testcase/H03_03.py, line: 21
+while isPalindrome and (i < (n // 2)):
+
+Syntax Error Found!
+[[WHILE: while ], [IDENTIFIER: isPalindrome], [LOGICAL_OPR: and ], [LP: (], [IDENTIFIER: i], [COMPARISON: <], [LP: (], [IDENTIFIER: n], [BINARY_OPR: //], [NUMBER: 2], [RP: )], [RP: )], [COLON: :]]
+
+=====
+testing testcase/TC1.txt...
+=====
+testcase/TC1.txt
+Checking testcase/TC1.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC4.txt...
+=====
+testcase/TC4.txt
+Checking testcase/TC4.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC5.txt...
+=====
+testcase/TC5.txt
+Checking testcase/TC5.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC6.txt...
+=====
+testcase/TC6.txt
+Checking testcase/TC6.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC7.txt...
+=====
+testcase/TC7.txt
+Checking testcase/TC7.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC8.txt...
+=====
+testcase/TC8.txt
+Checking testcase/TC8.txt...
+Yay, your program is accepted!
+
+=====
+testing testcase/TC9.txt...
+=====
+testcase/TC9.txt
+Checking testcase/TC9.txt...
+Yay, your program is accepted!
+
