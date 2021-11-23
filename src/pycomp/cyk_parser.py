@@ -1,7 +1,8 @@
 # =================== >>
 # PARSER
 # =================== >>
-import itertools, sys
+import itertools
+import sys
 from .lexer import run_lexer
 from .error import get_error
 from .CFG2CNF import grammar_to_list
@@ -53,13 +54,7 @@ class Parser:
                         subs_grammar(union, production, cnf_grammar)
                     cyk_table[i][j] = [var for var in set(union)]
 
-
-        # for i in range(length - 1, -1, -1):
-        #     for j in range(length):
-        #         print(f"{cyk_table[i][j]}", end="  ")
-        #     print()
-
-        return (cyk_table[length - 1][0] != [])
+        return (cyk_table[-1][0] != [])
 
     def parse_text(self):
         text_by_line, tokenized_lines = run_lexer(self.filename, self.text)
@@ -68,10 +63,9 @@ class Parser:
         if_count = 0
         ctr = 0
         for line in tokenized_lines:
-            # print(f"Checking line {ctr + 1}...")
-
             is_accepted = self.parse_cyk(line, cnf_grammar)
-            line_stringified = [get_tag_string(token.tag, line) for token in line]
+            line_stringified = stringify_line(line)
+            
             # Handle if block
             if is_accepted:
                 if 'IF' in line_stringified:
