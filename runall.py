@@ -8,7 +8,7 @@ if __name__ == '__main__':
     run_converter("database/CFG.txt", "database/CNF.txt")
     cnf_file = 'database/CNF.txt'
 
-    listdir = os.listdir("testcase")
+    listdir = os.listdir(folder_name[:-1])
     for filename in listdir:
         filename = folder_name + filename
         file = open(filename, encoding="utf8")

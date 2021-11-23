@@ -4,6 +4,8 @@
 TAB = '\t'
 SPACE = ' '
 BRACKETS = ['LP', 'RP', 'LSB', 'RSB', 'LCB', 'RCB']
+BINARY_OPR = ['PLUS', 'MINUS', 'STAR', 'BINARY_OPR', 'BITWISE_OPR']
+
 # =================== >>
 # TOKEN PATTERNS
 # =================== >>
@@ -14,8 +16,8 @@ token_rule = [
     (r'#[^\n]*',                'LN_COMMENT'),
     (r'\'{3}',                  'SQ_COMMENT'),
     (r'\"{3}',                  'DQ_COMMENT'),
-    (r'\'[^\n]+\'',             'STRING'),
-    (r'\"[^\n]+\"',             'STRING'),
+    (r'\'[^\n\']*\'',           'STRING'),
+    (r'\"[^\n\"]*\"',           'STRING'),
     # RESERVED KEYWORDS ========================== >>
     (r'False|True',             'BOOLEAN'),
     (r'None',                   'NONE'),
@@ -24,17 +26,17 @@ token_rule = [
     (r'class\s',                'CLASS'),
     (r'continue',               'CONTINUE'),
     (r'def\s',                  'DEF'),
-    (r'if\s',                   'IF'),
-    (r'elif\s',                 'ELIF'),
+    (r'if',                     'IF'),
+    (r'elif',                   'ELIF'),
     (r'else',                   'ELSE'),
     (r'for\s',                  'FOR'),
     (r'from\s',                 'FROM'),
     (r'import\s',               'IMPORT'),
     (r'pass',                   'PASS'),
-    (r'range\s',                'RANGE'),
+    (r'range',                  'RANGE'),
     (r'raise\s',                'RAISE'),
-    (r'return\s',               'RETURN'),
-    (r'while\s',                'WHILE'),
+    (r'return',                 'RETURN'),
+    (r'while',                  'WHILE'),
     (r'with\s',                 'WITH'),
     (r'not\s',                  'NOT'),
     (r'in\s',                   'IN'),
@@ -45,10 +47,14 @@ token_rule = [
     (r'[A-Za-z_][\w_]*',        'IDENTIFIER'),
     (r'->',                     'ARROW'),
     # OPERATORS ================================== >>
+    (r'\-=|\+=|\*\*=|\*=|%=',   'AUG_ASSIGN'),
+    (r'\/\/=|\/=|~=|<<=|>>=',   'AUG_ASSIGN'),
+    (r'&=|\|=|\^=',             'AUG_ASSIGN'),
     (r'\-',                     'MINUS'),
     (r'\+',                     'PLUS'),
-    (r'\*',                     'STAR'),
+    (r'\*\*\d+(\.\d*)?',        'POWER'),
     (r'\*\*|%|\/\/|\/',         'BINARY_OPR'),
+    (r'\*',                     'STAR'),
     (r'~',                      'BITWISE_NOT'),
     (r'>>|<<|~|&|\||\^',        'BITWISE_OPR'),
     (r'==|!=|>=|<=|>|<',        'COMPARISON'),
@@ -67,6 +73,7 @@ token_rule = [
     (r'\'',                     'SQUOTE'),
     (r'\"',                     'DQUOTE'),
     (r'\?',                     'QMARK'),
+    (r'\\',                     'BACKSLASH'),
 
     # CATCH EVERYTHING ELSE HERE
     (r'[^\s\t]*',               'UNCATEGORIZED'),

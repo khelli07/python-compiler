@@ -18,7 +18,7 @@ class Token:
             self.pos_end = pos_end
 
     def __repr__(self):
-        return f"[{self.tag}: {self.value}]"
+        return f"({self.tag}: {self.value})"
 
 class Position:
     def __init__(self, index, line, col, filename, filetext):
@@ -64,7 +64,7 @@ class Lexer:
                     string = match.group(0)
                     col_incr = count_length(string)
 
-                    if tag:
+                    if tag and tag != 'LN_COMMENT':
                         pos_start = self.pos.copy()
                         pos_end = self.pos.copy()
                         pos_end.col += count_length(string)

@@ -31,7 +31,7 @@ def get_error(name, line, message, text_by_line):
     token = get_token(name, line)
     pos_start = token.pos_start.copy()
     pos_end = token.pos_end.copy()
-    pos_end.col += count_length(name)
+    pos_end.col += count_length(token.value)
 
     error = InvalidSyntaxError(pos_start, pos_end, message,
                             text_by_line[token.pos_start.line - 1])
