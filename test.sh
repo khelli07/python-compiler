@@ -3,6 +3,6 @@ do
 	echo "====="
 	echo "testing $file..."
 	echo "====="
-	python3 run.py $file
+	python3 parserprogram.py $file
 	printf "\n"
 done
