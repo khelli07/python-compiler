@@ -2,9 +2,9 @@
 # LEXER
 # =================== >>
 import sys, re
-from database.token_db import token_rule
-from pycomp.error import IllegalCharError, InvalidSyntaxError
-from pycomp.utils import count_length
+from src.database.token_db import token_rule
+from .error import IllegalCharError, InvalidSyntaxError
+from .utils import count_length
 
 class Token:
     def __init__(self, tag, value=None, pos_start=None, pos_end=None):

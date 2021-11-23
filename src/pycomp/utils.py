@@ -1,8 +1,7 @@
 # =================== >>
 # UTILS
 # =================== >>
-from database.token_db import TAB
-
+from src.database.token_db import TAB
 
 def count_length(string, tab_length=4):
     length = len(string)

@@ -1,8 +1,8 @@
 # =================== >>
 # ERROR
 # =================== >>
-from database.token_db import SPACE
-from pycomp.utils import get_token, count_length
+from src.database.token_db import SPACE
+from .utils import get_token, count_length
 
 class Error:
     def __init__(self, name, pos_start, pos_end, message, txtline):

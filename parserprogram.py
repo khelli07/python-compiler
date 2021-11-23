@@ -1,8 +1,8 @@
 # lewat argumen
 
-from pycomp.CFG2CNF import run_converter
-from pycomp.cyk_parser import run_parser
-from pycomp.lexer import run_lexer
+from src.pycomp.CFG2CNF import run_converter
+from src.pycomp.cyk_parser import run_parser
+from src.pycomp.lexer import run_lexer
 
 import os
 import sys
@@ -11,8 +11,8 @@ import argparse
 filename = sys.argv[1]
 print(filename)
 
-run_converter("database/CFG.txt", "database/CNF.txt")
-cnf_file = 'database/CNF.txt'
+run_converter("src/database/CFG.txt", "src/database/CNF.txt")
+cnf_file = 'src/database/CNF.txt'
 
 file = open(filename, encoding="utf8")
 text = file.read()

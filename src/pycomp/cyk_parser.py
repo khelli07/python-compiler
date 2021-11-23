@@ -2,10 +2,10 @@
 # PARSER
 # =================== >>
 import itertools, sys
-from pycomp.lexer import run_lexer
-from pycomp.error import get_error
-from pycomp.CFG2CNF import grammar_to_list
-from pycomp.utils import get_tag_string
+from .lexer import run_lexer
+from .error import get_error
+from .CFG2CNF import grammar_to_list
+from .utils import get_tag_string
 
 def subs_grammar(union, production, grammar_list):
     '''
