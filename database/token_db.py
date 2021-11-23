@@ -3,8 +3,11 @@
 # =================== >>
 TAB = '\t'
 SPACE = ' '
+QUOTES = ["'", '"']
 BRACKETS = ['LP', 'RP', 'LSB', 'RSB', 'LCB', 'RCB']
 BINARY_OPR = ['PLUS', 'MINUS', 'STAR', 'BINARY_OPR', 'BITWISE_OPR']
+DIGITS = '0123456789'
+ALPHA = 'abcdefghijklmnopqrstuvwxyz'
 
 # =================== >>
 # TOKEN PATTERNS

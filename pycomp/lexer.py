@@ -2,7 +2,7 @@
 # LEXER
 # =================== >>
 import sys, re
-from database.token_db import token_rule, BRACKETS
+from database.token_db import QUOTES, token_rule, BRACKETS, DIGITS, ALPHA
 from pycomp.error import IllegalCharError, InvalidSyntaxError
 from pycomp.utils import count_length, is_bracket_match
 
@@ -39,6 +39,48 @@ class Lexer:
         self.filename = filename
         self.text = text + "\n"
         self.pos = Position(0, 1, 0, filename, text)
+
+    def check_varname(self):
+        text_by_line = self.text.split("\n")
+        quote_stack = []
+        current_var = []
+
+        while self.pos.index < len(self.text):
+            current_char = self.text[self.pos.index]
+            if (current_char == "\n"):
+                current_var = []
+                self.pos.line += 1
+                self.pos.col = 0
+            elif (current_char in ['\t', ' ']):
+                current_var = []
+            elif (current_char in QUOTES):
+                if (len(quote_stack) == 0):
+                    quote_stack.append(current_char)
+                else:
+                    top_stack = quote_stack[-1]
+                    if (top_stack == current_char):
+                        quote_stack.pop()
+                    else:
+                        quote_stack.append(current_char)
+
+            elif len(quote_stack) == 0: # Means not in string
+                if current_char in DIGITS:
+                    current_var.append(current_char)
+                elif current_char not in ALPHA or current_char not in ALPHA.upper():
+                    current_var = []
+                else:
+                    if current_char in ALPHA or current_char in ALPHA.upper():
+                        if len(current_var) != 0 and current_var[-1] in DIGITS:
+                            error = InvalidSyntaxError(self.pos, self.pos,
+                                            f"Invalid variable name", text_by_line[self.pos.line - 1])
+                            error.print_error()
+                            sys.exit(1)
+
+            self.pos.index += 1
+            self.pos.col += 1
+
+        # RESET
+        self.pos = Position(0, 1, 0, self.filename, self.text)
 
     def tokenize(self, rules=token_rule):
         token_list = []
@@ -133,4 +175,5 @@ class Lexer:
 
 def run_lexer(filename, text):
     lx = Lexer(filename, text)
+    lx.check_varname()
     return lx.tokenize()

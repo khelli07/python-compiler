@@ -6,7 +6,7 @@ funcname([1, 2, 3], a="10")
 halo ''' tes '''
 """
 if {1: 2}:
-    print("Hello")
+    print("Hello + 123asd")
 
 print("tes" + True)
 x = 5 * 2 + (5 + 2 * (3 + 4))
