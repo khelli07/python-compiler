@@ -1,9 +1,8 @@
 # =================== >>
 # LEXER
 # =================== >>
-from os import stat
 import sys, re
-from database.token_db import QUOTES, SPACE, token_rule, BRACKETS, DIGITS, ALPHA
+from database.token_db import token_rule, QUOTES, BRACKETS, DIGITS, ALPHA, SPACE
 from pycomp.error import IllegalCharError, InvalidSyntaxError
 from pycomp.utils import count_length, is_bracket_match
 from pycomp.var import VarFA

@@ -1,15 +1,18 @@
 dict1 = {"a": "b", "c": "d"}
-asda = 'halo' 108a
 dict2 = {"a": ["b", "c"],"e": ("f", z), "g": "h"}
 
 funcname([1, 2, 3], a="10")
+
+var = 1 if x else a
 """
+asda = 'halo' 108a
 halo ''' tes '''
 """
 if {1: 2}:
     print("Hello + 123asd")
 
+isApple = 'Yes' if fruit == 'Apple' else 'No'
 print("tes" + True)
-x = 5 * 2 + (5 + 2 * (3 + 4))
+x = 5 * 2 + (5 + 2 * (3 + 4)
 
 print(x)
