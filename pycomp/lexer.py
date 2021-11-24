@@ -48,6 +48,8 @@ class Lexer:
         var_str = "" # menampung kata (variabel, nama fungsi, dsb)
         while self.pos.index < len(self.text):
             current_char = self.text[self.pos.index]
+            if current_char == '#':
+                break
             if (current_char == "\n"):
                 var_str = ""
                 self.pos.line += 1
