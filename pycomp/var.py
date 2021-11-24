@@ -16,7 +16,7 @@ class VarFA:
 
 	def q0(name):  # inital state
 		# cek apakah huruf pertama adalah alfabet atau _
-		if name[0] in ALPHA or name[0] in ALPHA.lower() or name[0] == '_':
+		if name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
 			return VarFA.q3()
@@ -24,7 +24,7 @@ class VarFA:
 	def q1(name): # cek huruf kedua, ketiga, dan seterusya berupa alphanumeric
 		if name == "":
 			return VarFA.q2()
-		elif name[0] in ALPHA or name[0] in ALPHA.lower() or name[0] in DIGITS or name[0] == '_':
+		elif name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] in DIGITS or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
 			return VarFA.q3()

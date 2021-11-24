@@ -63,9 +63,9 @@ class Lexer:
                         quote_stack.append(current_char)
 
             elif len(quote_stack) == 0: # Means not in string
-                if current_char in DIGITS or current_char in ALPHA or current_char in ALPHA.lower():
+                if current_char in DIGITS or current_char in ALPHA or current_char in ALPHA.upper():
                     var_str += current_char
-                elif current_char == SPACE: # kena di TC10 kalo ga pake ini
+                elif current_char == '\n' or current_char == SPACE:
                     var_str = ""
                 else:
                     allDigit = True # cek var_str isinya bukan angka semua
@@ -73,7 +73,6 @@ class Lexer:
                         if i not in DIGITS:
                             allDigit = False
                             break
-                    
                     # validasi nama pakai VarFA.check()
                     if not allDigit and len(var_str) > 0:
                         if not VarFA.check(var_str):
