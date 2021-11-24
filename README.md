@@ -1,8 +1,14 @@
 # Python Interpreter / Compiler
 
-### This project is made as an assignment for IF2123 Theory of Computation and Automata (Teori Bahasa Formal dan Otomata) Institut Teknologi Bandung 2021.
+This project is made as an assignment for IF2124 Theory of Computation and Automata (Teori Bahasa Formal dan Otomata) Institut Teknologi Bandung 2021.
 
-Made with <span style="color: #e25555;">&hearts;</span> by:
+### Usage
+```sh
+python parserprogram.py <filename>
+python3 parserprogram.py <filename>
+```
+
+### Made with <span style="color: #e25555;">&hearts;</span> by:
 
 - Maria Khelli
 - Alifia Rahmah
