@@ -83,7 +83,7 @@ class Parser:
                 initial_token = line[0]
                 print(initial_token.pos_start)
                 print(text_by_line[initial_token.pos_start.line - 1])
-                print("Syntax Error Found!")
+                print("\033[91mSyntax Error Found!\033[0m")
                 sys.exit(1)
 
             ctr += 1
@@ -91,4 +91,4 @@ class Parser:
 def run_parser(filename, cnf_file, text):
     parser = Parser(filename, cnf_file, text)
     parser.parse_text()
-    print("Yay, your program is accepted!")
+    print("\033[92mYay, your program is accepted!\033[0m")

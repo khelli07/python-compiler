@@ -15,8 +15,9 @@ class Error:
     def print_error(self):
         print(f"In file {self.pos_start.filename}, line {self.pos_start.line}.")
         print(self.txtline)
-        print(SPACE * (self.pos_start.col) + '^')
-        print(f"{self.name} Error: {self.message}")
+        print(SPACE * (self.pos_start.col) + '\033[93m^\033[0m')
+        print(
+            f"\033[91m{self.name} Error: {self.message}\033[0m")
 
 class IllegalCharError(Error):
     def __init__(self, pos_start, pos_end, message, txtline):
