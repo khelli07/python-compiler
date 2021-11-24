@@ -3,9 +3,10 @@
 # =================== >>
 from os import stat
 import sys, re
-from database.token_db import QUOTES, token_rule, BRACKETS, DIGITS, ALPHA
+from database.token_db import QUOTES, SPACE, token_rule, BRACKETS, DIGITS, ALPHA
 from pycomp.error import IllegalCharError, InvalidSyntaxError
 from pycomp.utils import count_length, is_bracket_match
+from pycomp.var import VarFA
 
 class Token:
     def __init__(self, tag, value=None, pos_start=None, pos_end=None):
@@ -45,15 +46,12 @@ class Lexer:
         text_by_line = self.text.split("\n")
         quote_stack = []
 
-        state = 'q0'
+        var_str = "" # menampung kata (variabel, nama fungsi, dsb)
         while self.pos.index < len(self.text):
             current_char = self.text[self.pos.index]
             if (current_char == "\n"):
-                state = 'q0'
                 self.pos.line += 1
                 self.pos.col = -1
-            elif (current_char in ['\t', ' ']):
-                state = 'q0'
             elif (current_char in QUOTES):
                 if (len(quote_stack) == 0):
                     quote_stack.append(current_char)
@@ -65,17 +63,24 @@ class Lexer:
                         quote_stack.append(current_char)
 
             elif len(quote_stack) == 0: # Means not in string
-                if current_char in DIGITS:
-                    state = 'q1'
-                elif current_char in ALPHA or current_char in ALPHA.upper():
-                    if state == 'q1':
-                        state = 'q2'
-                        error = InvalidSyntaxError(self.pos, self.pos,
-                                        f"Invalid variable name", text_by_line[self.pos.line - 1])
-                        error.print_error()
-                        sys.exit(1)
+                if current_char in DIGITS or current_char in ALPHA or current_char in ALPHA.upper():
+                    var_str += current_char
+                elif current_char == '\n' or current_char == SPACE:
+                    var_str = ""
                 else:
-                    state = 'q0'
+                    allDigit = True # cek var_str isinya bukan angka semua
+                    for i in var_str:
+                        if i not in DIGITS:
+                            allDigit = False
+                            break
+                    # validasi nama pakai VarFA.check()
+                    if not allDigit and len(var_str) > 0:
+                        if not VarFA.check(var_str):
+                            error = InvalidSyntaxError(self.pos, self.pos,
+                                                    f"Invalid variable name", text_by_line[self.pos.line - 1])
+                            error.print_error()
+                            sys.exit(1)
+                    var_str = ""
 
             self.pos.index += 1
             self.pos.col += 1

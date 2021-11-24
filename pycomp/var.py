@@ -2,13 +2,13 @@
 # Cek apakah variabel diterima oleh Python menggunakan Finite Automata
 # referensi: https://www.geeksforgeeks.org/designing-deterministic-finite-automata-set-1/
 
-import re  # kalo boleh
-
 #########
 # VarFA #
 #########
 
 # diterima oleh FA jika VarFA.check(s) = True
+
+from database.token_db import DIGITS, ALPHA
 
 class VarFA:
 	def check(name):
@@ -16,22 +16,21 @@ class VarFA:
 
 	def q0(name):  # inital state
 		# cek apakah huruf pertama adalah alfabet atau _
-		if re.match("[a-zA-Z_]", name[0]):
+		if name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
-			return VarFA.q3(name)
+			return VarFA.q3()
 
-	def q1(name):
-		# huruf kedua, ketiga, dan seterusya berupa alphanumeric
+	def q1(name): # cek huruf kedua, ketiga, dan seterusya berupa alphanumeric
 		if name == "":
-			return VarFA.q2(name)
-		elif re.match("[a-zA-Z0-9_]", name[0]):
+			return VarFA.q2()
+		elif name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] in DIGITS or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
-			return VarFA.q3(name)
+			return VarFA.q3()
 
-	def q2(name):  # final state
+	def q2(): # final state, kalo diterima
 		return True
 
-	def q3(name):  # dead state
+	def q3(): # dead state(?)
 		return False
