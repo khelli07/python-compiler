@@ -42,3 +42,46 @@ for i in range(length - 1, -1, -1):
     for j in range(length):
         print(f"{cyk_table[i][j]}", end="  ")
     print()
+
+'''
+        text_by_line = self.text.split("\n")
+        quote_stack = []
+
+        state = 'q0'
+        while self.pos.index < len(self.text):
+            current_char = self.text[self.pos.index]
+            if (current_char == "\n"):
+                state = 'q0'
+                self.pos.line += 1
+                self.pos.col = -1
+            elif (current_char in ['\t', ' ']):
+                state = 'q0'
+            elif (current_char in QUOTES):
+                if (len(quote_stack) == 0):
+                    quote_stack.append(current_char)
+                else:
+                    top_stack = quote_stack[-1]
+                    if (top_stack == current_char):
+                        quote_stack.pop()
+                    else:
+                        quote_stack.append(current_char)
+
+            elif len(quote_stack) == 0: # Means not in string
+                if current_char in DIGITS:
+                    state = 'q1'
+                elif current_char in ALPHA or current_char in ALPHA.upper():
+                    if state == 'q1':
+                        state = 'q2'
+                        error = InvalidSyntaxError(self.pos, self.pos,
+                                        f"Invalid variable name", text_by_line[self.pos.line - 1])
+                        error.print_error()
+                        sys.exit(1)
+                else:
+                    state = 'q0'
+
+            self.pos.index += 1
+            self.pos.col += 1
+
+        # RESET
+        self.pos = Position(0, 1, 0, self.filename, self.text)
+    '''
