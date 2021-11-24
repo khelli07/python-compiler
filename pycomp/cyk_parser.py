@@ -4,7 +4,7 @@
 import itertools, sys
 from pycomp.lexer import run_lexer
 from pycomp.error import get_error
-from pycomp.cfg2cnf import grammar_to_list
+from pycomp.CFG2CNF import grammar_to_list
 from pycomp.utils import stringify_line
 
 def subs_grammar(union, production, grammar_list):

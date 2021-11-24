@@ -1,6 +1,6 @@
 # lewat argumen
 
-from pycomp.cfg2cnf import run_converter
+from pycomp.CFG2CNF import run_converter
 from pycomp.cyk_parser import run_parser
 from pycomp.lexer import run_lexer
 

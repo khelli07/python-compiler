@@ -49,6 +49,7 @@ class Lexer:
         while self.pos.index < len(self.text):
             current_char = self.text[self.pos.index]
             if (current_char == "\n"):
+                var_str = ""
                 self.pos.line += 1
                 self.pos.col = -1
             elif (current_char in QUOTES):
@@ -62,25 +63,28 @@ class Lexer:
                         quote_stack.append(current_char)
 
             elif len(quote_stack) == 0: # Means not in string
+
                 if current_char in DIGITS or current_char in ALPHA or current_char in ALPHA.upper():
                     var_str += current_char
-                elif current_char == '\n' or current_char == SPACE:
-                    var_str = ""
                 else:
-                    allDigit = True # cek var_str isinya bukan angka semua
-                    for i in var_str:
-                        if i not in DIGITS:
-                            allDigit = False
-                            break
-                    # validasi nama pakai VarFA.check()
-                    if not allDigit and len(var_str) > 0:
-                        if not VarFA.check(var_str):
-                            error = InvalidSyntaxError(self.pos, self.pos,
-                                                    f"Invalid variable name", text_by_line[self.pos.line - 1])
-                            error.print_error()
-                            sys.exit(1)
-                    var_str = ""
+                    # pembacaan variabel sudah selesai
+                    if len(var_str) > 0:
+                        allDigit = True # cek var_str isinya bukan angka semua
+                        for i in var_str:
+                            if i not in DIGITS:
+                                allDigit = False
+                                break
+                        if allDigit:
+                            var_str = ""
 
+                        # validasi nama pakai VarFA.check()
+                        if not allDigit and len(var_str) > 0:
+                            if not VarFA.check(var_str): # masuk ke q0 di varFA
+                                error = InvalidSyntaxError(self.pos, self.pos,
+                                                        f"Invalid variable name", text_by_line[self.pos.line - 1])
+                                error.print_error()
+                                sys.exit(1)
+                    var_str = ""  # hapus dulu sebelum baca kata berikutnya
             self.pos.index += 1
             self.pos.col += 1
 
