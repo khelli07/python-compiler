@@ -1,6 +1,7 @@
 # =================== >>
 # LEXER
 # =================== >>
+from os import stat
 import sys, re
 from database.token_db import QUOTES, token_rule, BRACKETS, DIGITS, ALPHA
 from pycomp.error import IllegalCharError, InvalidSyntaxError
@@ -43,16 +44,16 @@ class Lexer:
     def check_varname(self):
         text_by_line = self.text.split("\n")
         quote_stack = []
-        current_var = []
 
+        state = 'q0'
         while self.pos.index < len(self.text):
             current_char = self.text[self.pos.index]
             if (current_char == "\n"):
-                current_var = []
+                state = 'q0'
                 self.pos.line += 1
-                self.pos.col = 0
+                self.pos.col = -1
             elif (current_char in ['\t', ' ']):
-                current_var = []
+                state = 'q0'
             elif (current_char in QUOTES):
                 if (len(quote_stack) == 0):
                     quote_stack.append(current_char)
@@ -65,16 +66,16 @@ class Lexer:
 
             elif len(quote_stack) == 0: # Means not in string
                 if current_char in DIGITS:
-                    current_var.append(current_char)
-                elif current_char not in ALPHA or current_char not in ALPHA.upper():
-                    current_var = []
+                    state = 'q1'
+                elif current_char in ALPHA or current_char in ALPHA.upper():
+                    if state == 'q1':
+                        state = 'q2'
+                        error = InvalidSyntaxError(self.pos, self.pos,
+                                        f"Invalid variable name", text_by_line[self.pos.line - 1])
+                        error.print_error()
+                        sys.exit(1)
                 else:
-                    if current_char in ALPHA or current_char in ALPHA.upper():
-                        if len(current_var) != 0 and current_var[-1] in DIGITS:
-                            error = InvalidSyntaxError(self.pos, self.pos,
-                                            f"Invalid variable name", text_by_line[self.pos.line - 1])
-                            error.print_error()
-                            sys.exit(1)
+                    state = 'q0'
 
             self.pos.index += 1
             self.pos.col += 1
