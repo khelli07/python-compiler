@@ -82,6 +82,7 @@ class Lexer:
                         # validasi nama pakai VarFA.check()
                         if not allDigit and len(var_str) > 0:
                             if not VarFA.check(var_str): # masuk ke q0 di varFA
+                                self.pos.col -= 1
                                 error = InvalidSyntaxError(self.pos, self.pos,
                                                         f"Invalid variable name", text_by_line[self.pos.line - 1])
                                 error.print_error()
