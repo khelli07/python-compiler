@@ -19,7 +19,7 @@ class VarFA:
 		if name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
-			return VarFA.q3()
+			return False
 
 	def q1(name): # cek huruf kedua, ketiga, dan seterusya berupa alphanumeric
 		if name == "":
@@ -27,10 +27,7 @@ class VarFA:
 		elif name[0] in ALPHA or name[0] in ALPHA.upper() or name[0] in DIGITS or name[0] == '_':
 			return VarFA.q1(name[1:])
 		else:
-			return VarFA.q3()
+			return False
 
 	def q2(): # final state, kalo diterima
 		return True
-
-	def q3(): # dead state(?)
-		return False
